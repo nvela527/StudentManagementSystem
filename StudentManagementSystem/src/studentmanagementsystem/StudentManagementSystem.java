@@ -23,15 +23,28 @@ public class StudentManagementSystem {
 
   
 
-    // Add a student by ID and name
-    public void addStudent(String id, String name) {
+        // Add a student by ID and name, with option for honors
+    public void addStudent(String id, String name, boolean isHonors) 
+    {
         // Optional: prevent duplicate IDs
-        if (findStudentById(id) != null) {
+        if (findStudentById(id) != null) 
+        {
             System.out.println("Student with ID " + id + " already exists.");
             return;
         }
-        students.add(new Student(id, name));
+
+        if (isHonors) 
+        {
+            // Polymorphism: the list is of type Student,
+            // but it can also hold HonorsStudent objects.
+            students.add(new HonorsStudent(id, name));
+        } 
+        else 
+        {
+            students.add(new Student(id, name));
+        }
     }
+
 
     // Remove a student by ID, return true if removed
     public boolean removeStudent(String id) {

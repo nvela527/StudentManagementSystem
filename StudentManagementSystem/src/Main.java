@@ -182,12 +182,28 @@ public class Main
     // -------------------------
 
     private static void handleAddStudent(Scanner scanner, StudentManagementSystem sms) 
+{
+    String id = readNonEmptyString(scanner, "Enter student ID: ");
+    String name = readNonEmptyString(scanner, "Enter student name: ");
+
+    System.out.print("Is this an honors student? (Y/N): ");
+    String honorsInput = scanner.nextLine().trim();
+
+    boolean isHonors = honorsInput.equalsIgnoreCase("Y");
+
+    // Call the overloaded method that knows about honors students
+    sms.addStudent(id, name, isHonors);
+
+    if (isHonors) 
     {
-        String id = readNonEmptyString(scanner, "Enter student ID: ");
-        String name = readNonEmptyString(scanner, "Enter student name: ");
-        sms.addStudent(id, name);
+        System.out.println("Honors student added.");
+    } 
+    else 
+    {
         System.out.println("Student added.");
     }
+}
+
 
     private static void handleRemoveStudent(Scanner scanner, StudentManagementSystem sms) 
     {
